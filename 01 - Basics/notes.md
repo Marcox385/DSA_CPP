@@ -66,9 +66,12 @@ Having an expression and a type, the expression can be casted to the new type wi
 #### Explicit cast operators
 Casting can be dangerous, as information can be lost and the architecture of the computers in which code is ran can affect these operations. For this reason, C++ provides **static cast, dynamic_cast, const_cast** and **reinterpret_cast**.
 
-Static casting can be used to convert between two related types, i.e. numbers to numbers or pointers to pointers. The syntax is `static_cast<type>(data)`.
+_Static casting_ can be used to convert between two related types, i.e. numbers to numbers or pointers to pointers. The syntax is `static_cast<type>(data)`.
 
+When a change a type change is needed but it's not explicitly stated, an _implicit casting_ is made by the compiler. This can lead to unexpected results, so it's better to use other cast methods.
 
+## Control flow
+The usual structures: if, else-if, else, _switch_, while, _do-while_, for and break, continue and return statements. Syntax is similar to JavaScript or C.
 
 ## Pointers, Arrays and Structures
 ### Pointers
@@ -145,3 +148,27 @@ An object _x_ in a namespace _groupName_ can be accessed using _groupName::x_. T
 
 #### The "using" statement
 The **using** statement can be used to refer to a name of a namespace that its being used constantly. It can be used to access single names (`using groupName::name`) or whole namespaces (`using namespace groupName`)
+
+## Functions
+The usual: `return_type function_name(arguments){ ... }`.  
+By default, arguments are passed _by value_, but arguments can be also be _reference types_ with syntax already seen (`type& name`), which then can be modified within a function. This is the same as passing pointers by value and then modifying the value at its address. Both of these techniques can be used to "return" multiple values at once within a function, even if it returns void.
+
+### Constant references
+Passing structures and classes to functions is usually done by reference, otherwise, an entire copy of them would be created, rendering the program inefficient. To achieve a slightly higher level of efficiency, _constant references_ can be used; this will inform the compiler that, even an argument is passed by reference, it cannot be modified.
+
+### Array arguments
+When an array is passed as argument, it's converted to a pointer to its initial element (`type name[] -> type name*`), meaning, it's passed by reference and thus can be modified within a function.  
+If an array is needed as return type, another approach has to be taken rather than returning the actual array, such as the pointer to it or using a _vector_ from the _STL_.
+
+## Overloading and Inlining
+Overloading is the definition of two or more functions or operators that have the same name but behave differently depending on the types of their actual arguments.
+
+### Function overloading
+When two or more functions are defined with the same name but with different argument lists. The appropiate function it's called by the compiler (using the signature closest to the actual arguments).
+
+### Operator overloading
+Operators such as +, +==, >> and such can be overloaded. To do so, define a function-like block usually with bool return type and keyword **operator** before the operator to overload. Binary operators takes two arguments, unary only one.  
+This is usally used for class and structure comparison and equality, altogether with input and output.
+
+### In-line functions
+This type of functions are similar to Python lambdas, although they don't behave the same. Using the keyword **inline**, minimal functions (one-liners) can be defined.
