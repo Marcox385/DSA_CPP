@@ -17,7 +17,7 @@ int main() {
 	// Another standard I/O stream is std::cerr
 	
 	int sum = x + y;
-	std::cout << "Result: " << sum << std:endl;
+	std::cout << "Result: " << sum << std::endl;
 
 	return EXIT_SUCCESS;
 	// Code defined by cstdlib
